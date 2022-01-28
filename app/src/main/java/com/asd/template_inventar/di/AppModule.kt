@@ -19,7 +19,6 @@ import com.asd.template_inventar.model.usecase.*
 @Module
 @InstallIn(SingletonComponent::class)
 class AppModule {
-
     @Provides
     @Singleton
     fun provideRetrofit(): Retrofit {
@@ -31,23 +30,22 @@ class AppModule {
 
     @Provides
     @Singleton
-    fun providesMAService(retrofit: Retrofit): ProductService {
+    fun providesService(retrofit: Retrofit): ProductService {
         return retrofit.create(ProductService::class.java)
     }
 
     @Provides
     @Singleton
-    fun providesEntityDao(): EntityDao {
+    fun providesDAO(): EntityDao {
         return LocalDatabase.getDatabase(MainActivity.bcontext).entityDao()
     }
 
     @Module
     @InstallIn(SingletonComponent::class)
     interface AppModuleInt {
-
         @Binds
         @Singleton
-        fun provideMARepository(repo: BaseProductRepository): ProductRepository
+        fun provideRepository(repo: BaseProductRepository): ProductRepository
 
         @Binds
         @Singleton

@@ -12,6 +12,6 @@ class BaseSyncUseCase @Inject constructor(
     private val repo: ProductRepository
 ) : SyncUseCase {
     override suspend fun invoke(): List<Product> {
-        return repo.reconnection()
+        return repo.sync()
     }
 }

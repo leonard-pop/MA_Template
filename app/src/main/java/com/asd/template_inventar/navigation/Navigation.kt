@@ -35,7 +35,8 @@ fun Navigation(
             route = Screen.AddScreen.route
         ) {
             AddProductScreen(
-                addCallback =  { nume: String, tip: String, cantitate: Int, pret: Int, discount: Int, status: Boolean ->
+                addCallback =  { nume: String, tip: String, cantitate: Int, pret: Int,
+                                 discount: Int, status: Boolean ->
                     viewModel.add(nume, tip, cantitate, pret, discount, status)
                     navController.navigate(Screen.ListScreen.route)
                 }

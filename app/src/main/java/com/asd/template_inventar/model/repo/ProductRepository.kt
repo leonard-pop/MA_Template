@@ -15,7 +15,7 @@ import com.asd.template_inventar.utils.InternetStatusLive
 interface ProductRepository {
     suspend fun getAll(): List<Product>
     suspend fun add(entity: Product): Product
-    suspend fun reconnection(): List<Product>
+    suspend fun sync(): List<Product>
 }
 
 class BaseProductRepository @Inject constructor(
@@ -43,7 +43,7 @@ class BaseProductRepository @Inject constructor(
         return localRepo.save(product)
     }
 
-    override suspend fun reconnection(): List<Product> {
+    override suspend fun sync(): List<Product> {
         localRepo.getAll().forEach { product ->
             if(product.isLocal) {
                 try {

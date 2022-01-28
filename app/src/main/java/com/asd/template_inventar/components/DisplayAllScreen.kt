@@ -33,7 +33,7 @@ fun DisplayAllScreen(
         .fillMaxHeight()) {
         LazyColumn {
             items(products) { item ->
-                SingleEntityItem(entity = item)
+                SingleEntityItem(product = item)
             }
         }
         CircularIndeterminateProgressBar(isDisplayed = loading)
@@ -65,36 +65,26 @@ fun DisplayAllScreen(
 @ExperimentalMaterialApi
 @Composable
 fun SingleEntityItem(
-    entity: Product
+    product: Product
 ) {
     Card(
         modifier = Modifier
-            .padding(10.dp)
+            .padding(5.dp)
             .fillMaxWidth(),
         elevation = 5.dp
     ) {
-        Row(
+        Column(
             modifier = Modifier
-                .padding(15.dp)
-                .fillMaxWidth(),
-            verticalAlignment = Alignment.CenterVertically
+                .padding(10.dp),
+            verticalArrangement = Arrangement.SpaceEvenly
         ) {
-            Column(
-                modifier = Modifier
-                    .padding(20.dp),
-                verticalArrangement = Arrangement.SpaceEvenly
-            ) {
-                Row(horizontalArrangement = Arrangement.SpaceEvenly) {
-                    Text(text = "name: ${entity.nume}")
-                    Spacer(modifier = Modifier.padding(start = 20.dp))
-                    Text(text = "quantity: ${entity.cantitate}")
-                }
-                Row(horizontalArrangement = Arrangement.SpaceEvenly) {
-                    Text(text = "price: ${entity.pret}")
-                    Spacer(modifier = Modifier.padding(start = 20.dp))
-                    Text(text = "type: ${entity.tip}")
-                }
-            }
+            Text(text = "name: ${product.nume}")
+            Spacer(modifier = Modifier.padding(start = 10.dp))
+            Text(text = "quantity: ${product.cantitate}")
+            Spacer(modifier = Modifier.padding(start = 10.dp))
+            Text(text = "price: ${product.pret}")
+            Spacer(modifier = Modifier.padding(start = 10.dp))
+            Text(text = "type: ${product.tip}")
         }
     }
 }

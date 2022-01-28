@@ -21,7 +21,7 @@ fun DisplayCheapestScreen(
         LazyColumn {
             items(products) { product ->
                 SingleEntityItem(
-                    entity = product
+                    product = product
                 )
             }
         }

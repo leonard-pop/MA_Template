@@ -132,8 +132,8 @@ object  WebSocketManager {
 }
 
 interface MessageListener {
-    fun  onConnectSuccess () // successfully connected
-    fun  onConnectFailed () // connection failed
-    fun  onClose () // close
+    fun  onConnectSuccess ()
+    fun  onConnectFailed ()
+    fun  onClose ()
     fun onMessage(text: String?)
 }

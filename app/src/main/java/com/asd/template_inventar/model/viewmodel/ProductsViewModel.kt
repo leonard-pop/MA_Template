@@ -22,8 +22,6 @@ class ProductsViewModel @Inject constructor(
     val addUseCase: AddProductsUseCase,
     val syncUseCase: SyncUseCase
 ) : ViewModel() {
-    val loading = mutableStateOf(false)
-
     private val _listOfEntities: MutableState<List<Product>> = mutableStateOf(emptyList())
     val listOfEntities: State<List<Product>> = _listOfEntities
 
@@ -33,11 +31,15 @@ class ProductsViewModel @Inject constructor(
         return _listOfTopEntities
     }
 
+    val loading = mutableStateOf(false)
+
     init {
         viewModelScope.launch {
             loading.value = true
+
             val entityList = getAllUseCase()
             _listOfEntities.value = entityList
+
             delay(1000)
             loading.value = false
         }
@@ -46,24 +48,24 @@ class ProductsViewModel @Inject constructor(
     fun add(nume: String, tip: String, cantitate: Int, pret: Int, discount: Int, status: Boolean = false) {
         viewModelScope.launch {
             loading.value = true
-            
+
+            val product = Product(
+                nume = nume,
+                tip = tip,
+                cantitate = cantitate,
+                pret = pret,
+                discount = discount,
+                status = status
+            )
+
+            Log.d("Debug","Add: $product")
+
             try {
-                val product = Product(
-                    nume = nume,
-                    tip = tip,
-                    cantitate = cantitate,
-                    pret = pret,
-                    discount = discount,
-                    status = status
-                )
-                
-                Log.d("Debug","Add: $product")
-                
                 addUseCase(
                     entity = product
                 )
             }catch (exception: Exception) {
-                Log.d("Debug", "Exception: " + exception.message?:"")
+                Log.d("Debug", "Adding failed: " + exception.message?:"")
             }
 
             loading.value = false
@@ -77,7 +79,7 @@ class ProductsViewModel @Inject constructor(
             Log.d("Debug","Generating top cheapest")
             
             val entityList = getAllUseCase()
-            _listOfTopEntities.value = entityList.sortedByDescending { it.pret }.take(15)
+            _listOfTopEntities.value = entityList.sortedBy{it.pret}.take(15)
 
             delay(1000)
             loading.value = false

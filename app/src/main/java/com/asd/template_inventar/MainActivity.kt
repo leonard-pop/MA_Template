@@ -21,7 +21,7 @@ import kotlinx.coroutines.launch
 import com.asd.template_inventar.model.domain.Product
 import com.asd.template_inventar.model.viewmodel.ProductsViewModel
 import com.asd.template_inventar.navigation.Navigation
-import com.asd.template_inventar.ui.theme.MAInventarTheme
+import com.asd.template_inventar.ui.theme.TemplateTheme
 import com.asd.template_inventar.utils.*
 
 @AndroidEntryPoint
@@ -36,7 +36,7 @@ class MainActivity : ComponentActivity(), MessageListener {
         bcontext = applicationContext
 
         setContent {
-            MAInventarTheme {
+            TemplateTheme {
                 Surface(color = MaterialTheme.colors.background) {
                     App()
                 }

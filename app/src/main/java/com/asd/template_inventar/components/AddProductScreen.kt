@@ -22,6 +22,7 @@ fun AddProductScreen(
     viewModel: ProductsViewModel = hiltViewModel(),
     addCallback: (String, String, Int, Int, Int, Boolean) -> Unit
 ) {
+    val context = LocalContext.current
     var nameText by rememberSaveable { mutableStateOf("") }
     var typeText by rememberSaveable { mutableStateOf("") }
     var quantityText by rememberSaveable { mutableStateOf("0") }
@@ -29,8 +30,7 @@ fun AddProductScreen(
     var discountText by rememberSaveable { mutableStateOf("0") }
     var statusText by rememberSaveable { mutableStateOf("false") }
 
-    val context = LocalContext.current
-    Box(modifier = Modifier.fillMaxHeight().fillMaxWidth(0.9f)) {
+    Box(modifier = Modifier.fillMaxHeight().fillMaxWidth()) {
         Column() {
             TextField(
                 value = nameText,
